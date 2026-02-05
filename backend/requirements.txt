@@ -1,13 +1,6 @@
-fastapi==0.115.0
-uvicorn[standard]==0.30.3
-python-dotenv==1.0.1
-pydantic==2.9.0
-
-# Audio / ML stack (you can adjust to what you really use)
-numpy==2.1.0
-librosa==0.10.2.post1
-soundfile==0.12.1
-scikit-learn==1.5.1
-# If you plan to use deep learning models:
-# torch==2.4.0
-# torchaudio==2.4.0
+fastapi
+uvicorn
+librosa
+numpy
+scipy
+soundfile

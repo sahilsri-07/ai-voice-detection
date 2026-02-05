@@ -13,7 +13,7 @@ With the rapid growth of AI-generated voices and voice cloning, audio deepfakes 
 This project provides an automated system that:
 - Analyzes a voice sample
 - Detects whether it is **AI-generated** or **Human**
-- Returns a structured JSON response with confidence score
+- Returns a structured JSON response with a confidence score
 
 ---
 
@@ -61,61 +61,62 @@ ai-voice-detection/
 ├── .gitignore
 └── README.md
 
+
 ---
 
 ## ⚙️ Tech Stack
 
-- Backend: Python (Flask / FastAPI)
-- Audio Processing: Librosa, NumPy
-- Machine Learning: Scikit-learn / TensorFlow / PyTorch
-- API Format: REST + JSON
+- **Backend**: Python (Flask / FastAPI)  
+- **Audio Processing**: Librosa, NumPy  
+- **Machine Learning**: Scikit-learn / TensorFlow / PyTorch  
+- **API Format**: REST + JSON  
 
 ---
 
 ## 🔌 API Specification
 
 ### Endpoint
-
 POST /detect-voice
 
 
-
 ### Headers
-
 Content-Type: application/json
-x-api-key:hackathon-secret-key
+x-api-key: hackathon-secret-key
 
 
-🧪 Hackathon Evaluation Alignment
+---
 
-No hard-coded outputs
+## 🧪 Hackathon Evaluation Alignment
 
-No external detection APIs
+- No hard-coded outputs  
+- No external detection APIs  
+- AI-based inference logic  
+- Structured JSON output  
+- Accuracy, stability, and explainability focused  
 
-AI-based inference logic
+---
 
-Structured JSON output
+## 📌 Use Cases
 
-Accuracy, stability, and explainability focused
+- AI voice fraud detection  
+- Deepfake audio identification  
+- Secure voice authentication  
+- Research and experimentation  
 
-📌 Use Cases
+---
 
-AI voice fraud detection
+## 🚧 Future Improvements
 
-Deepfake audio identification
+- Real-time voice detection  
+- Confidence visualization  
+- Expanded multilingual support  
+- Explainable AI predictions  
+- Admin dashboard for analytics  
 
-Secure voice authentication
+---
 
-Research and experimentation
+## 🏁 Hackathon Submission
 
-🚧 Future Improvements
+This project was developed and submitted as part of the **GUVI × HCL Hackathon** under the problem statement:
 
-Real-time voice detection
-
-Confidence visualization
-
-Expanded multilingual support
-
-Explainable AI predictions
-
-Admin dashboard for analytics
+**“AI-Generated Voice Detection (Tamil, English, Hindi, Malayalam, Telugu)”**

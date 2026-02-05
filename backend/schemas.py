@@ -17,8 +17,10 @@ class DetectionRequest(BaseModel):
         description="Base64-encoded MP3 audio"
     )
 
-    class Config:
-        populate_by_name = True
+    # ✅ THIS IS THE KEY FIX (Pydantic v2)
+    model_config = {
+        "populate_by_name": True
+    }
 
 
 class DetectionResponse(BaseModel):

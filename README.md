@@ -86,22 +86,6 @@ Content-Type: application/json
 x-api-key:hackathon-secret-key
 
 
-### Request Body
-
-```json
-{
-  "audio_base64": "<Base64 encoded MP3 audio>",
-  "language": "English"
-}
-
-
-📤 Sample Response
-
-{
-  "result": "AI_GENERATED",
-  "confidence": 0.87
-}
-
 🧪 Hackathon Evaluation Alignment
 
 No hard-coded outputs

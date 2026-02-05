@@ -3,21 +3,26 @@ from typing import Literal
 
 
 class DetectionRequest(BaseModel):
-    language: Literal["ta", "en", "hi", "ml", "te"] = Field(
-        ..., description="Language code: ta/en/hi/ml/te"
-    )
+    language: Literal["ta", "en", "hi", "ml", "te"]
 
     audio_format: Literal["mp3"] = Field(
-        ..., description="Audio format (mp3)"
+        ...,
+        alias="audioFormat",
+        description="Audio format (mp3)"
     )
 
     audio_base64: str = Field(
-        ..., description="Base64-encoded MP3 audio"
+        ...,
+        alias="audioBase64",
+        description="Base64-encoded MP3 audio"
     )
+
+    class Config:
+        populate_by_name = True
 
 
 class DetectionResponse(BaseModel):
     result: Literal["AI_GENERATED", "HUMAN"]
-    confidence: float = Field(ge=0.0, le=1.0)
+    confidence: float
     language: str
     detail: str | None = None

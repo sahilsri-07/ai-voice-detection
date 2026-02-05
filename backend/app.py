@@ -12,7 +12,6 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Allow all origins for hackathon testing
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -44,7 +43,6 @@ def detect_voice(
     if payload.language not in ALLOWED_LANGUAGES:
         raise HTTPException(status_code=400, detail="Unsupported language")
 
-    # audio_format is validated but not required by model
     label, confidence, detail = classifier.predict(
         audio_base64=payload.audio_base64,
         language_code=payload.language,

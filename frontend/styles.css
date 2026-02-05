@@ -1,0 +1,171 @@
+/* Global typography */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+/* Subtle noise overlay to avoid flat background */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.65'/%3E%3C/svg%3E");
+}
+
+/* Hero gradient text */
+.gradient-text {
+  background-image: linear-gradient(
+    120deg,
+    #4ade80,
+    #22d3ee,
+    #a855f7 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glassmorphism card */
+.glass-panel {
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: radial-gradient(
+      circle at top left,
+      rgba(56, 189, 248, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(16, 185, 129, 0.12),
+      transparent 55%
+    ),
+    rgba(15, 23, 42, 0.96);
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(26px);
+}
+
+.info-pill {
+  border-radius: 999px;
+  padding: 0.7rem 0.9rem;
+  background: radial-gradient(
+      circle at top left,
+      rgba(56, 189, 248, 0.22),
+      transparent 60%
+    ),
+    rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(15, 23, 42, 0.9);
+}
+
+.metric-pill {
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(30, 64, 175, 0.5);
+  background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.95),
+      rgba(15, 23, 42, 0.9)
+    ),
+    radial-gradient(
+      circle at top left,
+      rgba(45, 212, 191, 0.18),
+      transparent 55%
+    );
+}
+
+/* Call-to-action button with subtle shine */
+.button-gradient {
+  background-image: linear-gradient(
+    120deg,
+    #22c55e,
+    #22d3ee,
+    #a855f7 130%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.button-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.2),
+    transparent 35%
+  );
+  opacity: 0;
+  transform: translateX(-40%);
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.4s ease-out;
+}
+
+.button-gradient:hover::before {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+/* Loading spinner used inside the Analyze button */
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid rgba(15, 23, 42, 0.24);
+  border-top-color: rgba(15, 23, 42, 0.92);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Decorative waveform icon */
+.wave-icon {
+  position: relative;
+  display: inline-flex;
+  width: 18px;
+  height: 14px;
+}
+
+.wave-icon::before,
+.wave-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    rgba(45, 212, 191, 0.3),
+    rgba(56, 189, 248, 0.5)
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
+}
+
+.wave-icon::after {
+  animation: wave-rise 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes wave-rise {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}

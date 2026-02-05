@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Virtual environment
+venv/
+backend/venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Audio / temp files
+*.wav
+*.mp3
+audio_base64.txt

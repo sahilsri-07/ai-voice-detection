@@ -1,9 +1,9 @@
-import os
-from dotenv import load_dotenv
+API_KEY = "hackathon-secret-key"
 
-load_dotenv()
-
-API_KEY = os.getenv("VOICE_API_KEY", "CHANGE_ME_IN_PROD")
-
-ALLOWED_LANGUAGES = {"ta": "Tamil", "en": "English", "hi": "Hindi",
-                     "ml": "Malayalam", "te": "Telugu"}
+ALLOWED_LANGUAGES = {
+    "en": "English",
+    "hi": "Hindi",
+    "ta": "Tamil",
+    "ml": "Malayalam",
+    "te": "Telugu",
+}

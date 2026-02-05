@@ -1,24 +1,12 @@
 from fastapi import FastAPI, HTTPException, Header
-from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
+import requests
+import base64
 
-from config import API_KEY, ALLOWED_LANGUAGES
-from schemas import DetectionRequest, DetectionResponse
 from model import classifier
+from config import API_KEY, ALLOWED_LANGUAGES
 
-app = FastAPI(
-    title="AI-Generated Voice Detection API",
-    description="Detects whether a voice sample is AI-generated or spoken by a human.",
-    version="1.0.0",
-)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app = FastAPI()
 
 
 def verify_api_key(x_api_key: Optional[str]):
@@ -28,29 +16,40 @@ def verify_api_key(x_api_key: Optional[str]):
         raise HTTPException(status_code=403, detail="Invalid API key")
 
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
-
-
-@app.post("/api/detect", response_model=DetectionResponse)
+@app.post("/api/detect")
 def detect_voice(
-    payload: DetectionRequest,
+    payload: dict,
     x_api_key: Optional[str] = Header(default=None, alias="x-api-key"),
 ):
     verify_api_key(x_api_key)
 
-    if payload.language not in ALLOWED_LANGUAGES:
+    # GUVI sends audio file URL
+    audio_url = payload.get("audio_url") or payload.get("audioUrl")
+    language = payload.get("language", "en")
+
+    if not audio_url:
+        raise HTTPException(status_code=400, detail="audio_url is required")
+
+    if language not in ALLOWED_LANGUAGES:
         raise HTTPException(status_code=400, detail="Unsupported language")
 
+    # Download audio file
+    response = requests.get(audio_url)
+    if response.status_code != 200:
+        raise HTTPException(status_code=400, detail="Unable to fetch audio file")
+
+    # Convert MP3 → Base64
+    audio_base64 = base64.b64encode(response.content).decode("utf-8")
+
+    # Run prediction
     label, confidence, detail = classifier.predict(
-        audio_base64=payload.audio_base64,
-        language_code=payload.language,
+        audio_base64=audio_base64,
+        language_code=language,
     )
 
-    return DetectionResponse(
-        result=label,
-        confidence=confidence,
-        language=ALLOWED_LANGUAGES[payload.language],
-        detail=detail,
-    )
+    return {
+        "result": label,
+        "confidence": confidence,
+        "language": ALLOWED_LANGUAGES[language],
+        "detail": detail,
+    }

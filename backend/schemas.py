@@ -1,26 +1,23 @@
 from pydantic import BaseModel, Field
-from typing import Literal, Optional
+from typing import Literal
 
 
 class DetectionRequest(BaseModel):
-    # Accepts "audio_base64_format" from GUVI form
-    audio_base64: str = Field(
-        ...,
-        alias="audio_base64_format",
-        description="Base64-encoded MP3 audio"
-    )
-
     language: Literal["ta", "en", "hi", "ml", "te"] = Field(
-        ...,
-        description="Language code: ta/en/hi/ml/te"
+        ..., description="Language code: ta/en/hi/ml/te"
     )
 
-    class Config:
-        populate_by_name = True
+    audio_format: Literal["mp3"] = Field(
+        ..., description="Audio format (mp3)"
+    )
+
+    audio_base64: str = Field(
+        ..., description="Base64-encoded MP3 audio"
+    )
 
 
 class DetectionResponse(BaseModel):
     result: Literal["AI_GENERATED", "HUMAN"]
     confidence: float = Field(ge=0.0, le=1.0)
     language: str
-    detail: Optional[str] = None
+    detail: str | None = None
